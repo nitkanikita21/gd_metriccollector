@@ -41,7 +41,7 @@ java {
 
 tasks.jar {
     inputs.property("archivesName", project.base.archivesName.get())
-
+    isZip64 = true
     from("LICENSE") {
         rename { fileName ->
             "${fileName}_${inputs.properties["archivesName"]}"
@@ -68,4 +68,6 @@ tasks.processResources {
         )
     }
 }
+
+
 

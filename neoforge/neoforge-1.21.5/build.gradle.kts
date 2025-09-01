@@ -117,3 +117,6 @@ tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"
 }
 
+tasks.shadowJar {
+    isZip64 = true
+}

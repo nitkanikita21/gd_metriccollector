@@ -27,3 +27,7 @@ bukkit {
     apiVersion = "1.20"
     author = "nitkanikita21"
 }
+
+tasks.shadowJar {
+    isZip64 = true
+}
