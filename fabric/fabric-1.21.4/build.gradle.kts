@@ -15,6 +15,10 @@ val archivesBaseName="template-mod"
 version = modVersion
 group = mavenGroup
 
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+}
+
 dependencies {
     minecraft("com.mojang:minecraft:${minecraftVersion}")
     mappings("net.fabricmc:yarn:${yarnVersion}:v2")

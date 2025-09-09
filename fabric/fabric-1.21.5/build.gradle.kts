@@ -3,6 +3,9 @@ plugins {
     java
 }
 
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+}
 
 val yarnVersion = "1.21.5+build.1"
 val loaderVersion = "0.16.14"
