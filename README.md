@@ -12,7 +12,7 @@ The project uses Gradle as the build system. To build the mod:
    ```bash
    docker build \
     [--build-arg BASE_IMAGE=eclipse-temurin:21-jdk-jammy] \   # <- use specific JDK for minecraft versions 
-    -t mc-mod-env .
+    -t <CONTAINER_NAME> .
     ```
 3. Start container for build:
    ```bash
@@ -26,5 +26,5 @@ The project uses Gradle as the build system. To build the mod:
 
 Specific commands for building specific modules. Replace `<MC_VERSION>` with the available version of Minecraft.
 1. **NeoForged**: `./gradlew :neoforge:neoforge-<MC_VERSION>:shadowJar`
-2. **Spigot**: `./gradlew :neoforge:spigot-1.20:shadowJar`
+2. **Spigot**: `./gradlew :spigot:spigot-1.20:shadowJar`
 3. **Fabric**: `./gradlew :fabric:fabric-<MC_VERSION>:build`

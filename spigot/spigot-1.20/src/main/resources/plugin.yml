@@ -1,0 +1,4 @@
+main: "net.nitkanikita21.metriccollector.MetricCollectorPlugin"
+apiVersion: "1.20"
+author: "nitkanikita21"
+name: MetricCollector
