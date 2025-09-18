@@ -7,18 +7,38 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class MetricCollector {
     public static final String SERVER_UUID_ENV_NAME = "HOSTNAME";
+    public static final Duration PUSH_PERIOD = Duration.ofSeconds(15);
 
     private final UUID serverUUID;
     private final Logger LOGGER = LoggerFactory.getLogger("MetricCollector Common module");
+    private final Timer timer = new Timer();
 
     public MetricCollector(UUID serverUUID) {
         this.serverUUID = serverUUID;
+    }
+
+
+    public void initializeAutoPush(
+        Supplier<Float> tpsSupplier,
+        Supplier<Float> msptSupplier
+    ) {
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                collect(tpsSupplier.get(), msptSupplier.get());
+            }
+        }, 0, PUSH_PERIOD.toMillis());
     }
 
     public void collect(float tps, float mspt) {

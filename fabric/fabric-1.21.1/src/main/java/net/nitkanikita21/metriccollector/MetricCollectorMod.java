@@ -1,6 +1,7 @@
 package net.nitkanikita21.metriccollector;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,13 +19,11 @@ public class MetricCollectorMod implements ModInitializer {
     public void onInitialize() {
         LOGGER.info("METRIC COLLECTOR SETUP");
 
-        ServerTickEvents.END_SERVER_TICK.register(server -> {
-            if (server.getTicks() % 20 == 0) {
-                float mspt = server.getTickManager().getMillisPerTick();
-                float tps = server.getTickManager().getTickRate();
-
-                metricCollector.collect(tps, mspt);
-            }
+        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+            metricCollector.initializeAutoPush(
+                server.getTickManager()::getTickRate,
+                server.getTickManager()::getMillisPerTick
+            );
         });
 
 

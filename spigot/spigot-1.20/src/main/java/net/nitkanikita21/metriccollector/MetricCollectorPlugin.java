@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Timer;
 import java.util.UUID;
 
 public class MetricCollectorPlugin extends JavaPlugin {
@@ -16,9 +17,7 @@ public class MetricCollectorPlugin extends JavaPlugin {
 
         Bukkit.getScheduler().runTaskTimer(this, new Lag(), 0L, 1L);
 
+        metricCollector.initializeAutoPush(() -> (float) Lag.getTPS(), () -> (float) Lag.getMSPT());
 
-        Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, () -> {
-            metricCollector.collect((float) Lag.getTPS(), (float) Lag.getMSPT());
-        }, 0L, 20L);
     }
 }
