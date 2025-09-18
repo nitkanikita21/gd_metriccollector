@@ -20,4 +20,9 @@ public class MetricCollectorPlugin extends JavaPlugin {
         metricCollector.initializeAutoPush(() -> (float) Lag.getTPS(), () -> (float) Lag.getMSPT());
 
     }
+
+    @Override
+    public void onDisable() {
+        metricCollector.stopTimer();
+    }
 }

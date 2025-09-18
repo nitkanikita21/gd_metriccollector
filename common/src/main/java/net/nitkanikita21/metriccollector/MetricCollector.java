@@ -41,6 +41,10 @@ public class MetricCollector {
         }, 0, PUSH_PERIOD.toMillis());
     }
 
+    public void stopTimer() {
+        timer.cancel();
+    }
+
     public void collect(float tps, float mspt) {
 
 

@@ -24,5 +24,9 @@ public class MetricCollectorMod implements ModInitializer {
                 server.getTickManager()::getMillisPerTick
             );
         });
+
+        ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
+            metricCollector.stopTimer();
+        });
     }
 }

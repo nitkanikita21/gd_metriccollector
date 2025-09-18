@@ -26,5 +26,9 @@ public class MetricCollectorMod implements ModInitializer {
             );
         });
 
+        ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
+            metricCollector.stopTimer();
+        });
+
     }
 }
